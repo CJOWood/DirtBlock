@@ -1,0 +1,5 @@
+main: org.chriswood.plugin.CraftStatsPlus.CraftStatsPlus
+name: CraftStatsPlus
+version: 1.00
+author: Chris Wood
+description: A simple, lightweight plugin that collects data and returns it to our servers where you can view its statistics.
