@@ -18,10 +18,10 @@ import org.bukkit.event.player.PlayerItemBreakEvent;
 
 public class CraftStatsPlusListener implements Listener{
 	
-	private StatHolder stats;
+	private CraftStatsPlusHolder stats;
 	private CraftStatsPlusConfig config;
 	
-	public CraftStatsPlusListener(StatHolder stats, CraftStatsPlusConfig config) {
+	public CraftStatsPlusListener(CraftStatsPlusHolder stats, CraftStatsPlusConfig config) {
 		this.stats = stats;
 		this.config = config;
 	}

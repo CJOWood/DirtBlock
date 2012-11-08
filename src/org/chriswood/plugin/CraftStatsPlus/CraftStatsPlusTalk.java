@@ -11,15 +11,15 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.logging.*;
 
-public class SocketTalk extends Thread {
+public class CraftStatsPlusTalk extends Thread {
 	private static final Logger LOG = Logger.getLogger("CraftStats+");
 	private boolean running;
 	private final String host;
 	private final int port;
 	private ServerSocket server;
-	private StatHolder stats;
+	private CraftStatsPlusHolder stats;
 	
-	public SocketTalk(StatHolder stats, String host, int port) throws Exception {
+	public CraftStatsPlusTalk(CraftStatsPlusHolder stats, String host, int port) throws Exception {
 		this.host = host;
 		this.port = port;
 		this.stats = stats;

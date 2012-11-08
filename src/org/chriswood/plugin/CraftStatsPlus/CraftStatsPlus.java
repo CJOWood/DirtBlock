@@ -12,8 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class CraftStatsPlus extends JavaPlugin {
 	
 	private static final Logger LOG = Logger.getLogger("CraftStats+");
-	private StatHolder statData = new StatHolder();
-	private SocketTalk talker;
+	private CraftStatsPlusHolder statData = new CraftStatsPlusHolder();
+	private CraftStatsPlusTalk talker;
 	
 	public void onEnable(){
 		CraftStatsPlusConfig config = new CraftStatsPlusConfig(this);
@@ -24,7 +24,7 @@ public class CraftStatsPlus extends JavaPlugin {
 		int port = config.getPort();
 		LOG.info("[CraftStats+] Starting on " + host + ":" + port + ".");
 		try {
-				talker = new SocketTalk(statData, host, port);
+				talker = new CraftStatsPlusTalk(statData, host, port);
 				talker.start();
 		} catch (Exception e) {
 			e.printStackTrace();

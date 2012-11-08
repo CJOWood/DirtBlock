@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import org.json.simple.JSONObject;
 
-public class StatHolder {
+public class CraftStatsPlusHolder {
 	public Map<String, Map<String, Map<String, Integer>>> stats = new HashMap<String, Map<String, Map<String, Integer>>>();
 	//     Map<"Event", Map<"user", Map<"data", amount>>>
-	public StatHolder() {}
+	public CraftStatsPlusHolder() {}
 	
 	public void addData(String event, String user, String data, int dataAmt){
 		if(stats.containsKey(event)){
