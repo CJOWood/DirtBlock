@@ -1,6 +1,6 @@
 /*
  * Big thanks to the Votifier plugin for being open source.
- * Oh, and the Internet. Its pretty awesome.
+ * Oh, and the Internet. It's pretty awesome.
  */
 
 package org.chriswood.plugin.CraftStatsPlus;
@@ -19,7 +19,7 @@ public class CraftStatsPlus extends JavaPlugin {
 		CraftStatsPlusConfig config = new CraftStatsPlusConfig(this);
 		getServer().getPluginManager().registerEvents(new CraftStatsPlusListener(statData, config), this);
 		
-		//Initialize SocketTalker...
+		//Initialize Talker...
 		String host = config.getHost();
 		int port = config.getPort();
 		LOG.info("[CraftStats+] Starting on " + host + ":" + port + ".");

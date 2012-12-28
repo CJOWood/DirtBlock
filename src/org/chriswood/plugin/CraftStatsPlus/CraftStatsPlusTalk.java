@@ -66,6 +66,7 @@ public class CraftStatsPlusTalk extends Thread {
 					out.flush();
 				}
 				
+				//System.out.println("Data Upload..." + stats.toJson());
 				//Clear data after upload
 				stats.clearData();
 				in.close();

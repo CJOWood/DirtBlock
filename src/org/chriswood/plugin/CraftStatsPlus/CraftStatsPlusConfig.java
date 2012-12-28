@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -20,8 +22,20 @@ public class CraftStatsPlusConfig {
 	
 	public CraftStatsPlusConfig(CraftStatsPlus CSP) {
 		this.CSP = CSP;
+		alertCStats();
 		setupConfig();
 		loadConfig();
+	}
+	
+	public void alertCStats(){
+		try{
+			URL cstats = new URL("http://craftstats.com/api?req=m07");
+			URLConnection conn = cstats.openConnection();
+			conn.connect();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void setupConfig() {
