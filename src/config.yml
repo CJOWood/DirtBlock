@@ -14,5 +14,6 @@ XPGained: true
 PlayerDamage: true
 PlayerMove: true
 
+UpdateCheck: true
 #Would you like to participate in BETA feature testing? (Set 'true' if you do)
 BETA: false

@@ -24,9 +24,9 @@ public class DirtBlockConfig {
 	
 	public DirtBlockConfig(DirtBlock CSP) {
 		this.CSP = CSP;
-		checkCS();
 		setupConfig();
 		loadConfig();
+		checkCS();
 	}
 	
 	public void checkCS(){
@@ -38,7 +38,7 @@ public class DirtBlockConfig {
 			BufferedReader read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String returned;
 			while((returned = read.readLine()) != null){
-				if(!(returned.equals(CSP.getDescription().getVersion().toString())))
+				if(getUpdateCheck() && !(returned.equals(CSP.getDescription().getVersion().toString())))
 					LOG.info("[DirtBlock] You are not using the lastest version of DirtBlock ("+ returned +")!");
 			}
 		}catch(Exception e){
@@ -100,6 +100,10 @@ public class DirtBlockConfig {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	public boolean getUpdateCheck(){
+		return cfg.getBoolean("UpdateCheck", true);
 	}
 	
 	public String getHost() {
