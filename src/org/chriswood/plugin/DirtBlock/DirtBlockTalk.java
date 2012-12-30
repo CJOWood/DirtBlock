@@ -57,24 +57,31 @@ public class DirtBlockTalk extends Thread {
 				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 				
 				String line = in.readLine();
-				if(!line.equals("GoForIt")) {
-					LOG.log(Level.WARNING, "[DirtBlock] Bad response...");
-					throw new Exception("[DirtBlock] Error with CraftStats response code. Contact Us.");
-				}else {
+				if(line.equals("GoForIt")) {
 					out.write(stats.toJson());
 					out.newLine();
 					out.flush();
+					stats.clearData();
+				}else if(line.contains("ping")){
+						out.write("Pong!");
+						out.newLine();
+						out.flush();
+				}else {
+					out.write("Wut? Sending me the wrong stuffs yo!");
+					out.newLine();
+					out.flush();
+					LOG.log(Level.WARNING, "[DirtBlock] Bad Socket Response.");
+					//throw new Exception("[DirtBlock] Error with CraftStats response code. Contact Us.");
 				}
 				
 				//System.out.println("Data Upload..." + stats.toJson());
 				//Clear data after upload
-				stats.clearData();
 				in.close();
 				out.close();
 				socket.close();
 				
 			} catch(SocketException e) {
-				//LOG.log(Level.WARNING, "[DirtBlock] Server Reloaded? Protocol error. ", e.getStackTrace());
+				//LOG.log(Level.WARNING, "[DirtBlock] Server Reloaded? Protocol error. ");
 			} catch(IOException e) {
 				LOG.log(Level.WARNING, "[DirtBlock] Error reading/writing. ", e.getStackTrace());
 			}catch(Exception e) {
