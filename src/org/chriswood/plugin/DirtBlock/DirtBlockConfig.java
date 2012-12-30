@@ -1,10 +1,12 @@
-package org.chriswood.plugin.CraftStatsPlus;
+package org.chriswood.plugin.DirtBlock;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
@@ -14,24 +16,31 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-public class CraftStatsPlusConfig {
-	private static final Logger LOG = Logger.getLogger("CraftStats+");
-	private CraftStatsPlus CSP;
+public class DirtBlockConfig {
+	private static final Logger LOG = Logger.getLogger("DirtBlock");
+	private DirtBlock CSP;
 	private File config;
 	private YamlConfiguration cfg;
 	
-	public CraftStatsPlusConfig(CraftStatsPlus CSP) {
+	public DirtBlockConfig(DirtBlock CSP) {
 		this.CSP = CSP;
-		alertCStats();
+		checkCS();
 		setupConfig();
 		loadConfig();
 	}
 	
-	public void alertCStats(){
+	public void checkCS(){
 		try{
-			URL cstats = new URL("http://craftstats.com/api?req=m07");
+			URL cstats = new URL("http://192.241.15.102/api?req=m07");
 			URLConnection conn = cstats.openConnection();
+			conn.setReadTimeout(10000);
 			conn.connect();
+			BufferedReader read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String returned;
+			while((returned = read.readLine()) != null){
+				if(!(returned.equals(CSP.getDescription().getVersion().toString())))
+					LOG.info("[DirtBlock] You are not using the lastest version of DirtBlock ("+ returned +")!");
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -139,5 +148,13 @@ public class CraftStatsPlusConfig {
 	
 	public boolean getXPGained() {
 		return cfg.getBoolean("XPGained", true);
+	}
+	
+	public boolean getPlayerDmg() {
+		return cfg.getBoolean("PlayerDamage", true);
+	}
+	
+	public boolean getPlayerMove() {
+		return cfg.getBoolean("PlayerMove", true);
 	}
 }

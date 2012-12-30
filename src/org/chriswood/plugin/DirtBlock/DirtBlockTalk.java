@@ -1,4 +1,4 @@
-package org.chriswood.plugin.CraftStatsPlus;
+package org.chriswood.plugin.DirtBlock;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,15 +11,15 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.logging.*;
 
-public class CraftStatsPlusTalk extends Thread {
-	private static final Logger LOG = Logger.getLogger("CraftStats+");
+public class DirtBlockTalk extends Thread {
+	private static final Logger LOG = Logger.getLogger("DirtBlock");
 	private boolean running;
 	private final String host;
 	private final int port;
 	private ServerSocket server;
-	private CraftStatsPlusHolder stats;
+	private DirtBlockHolder stats;
 	
-	public CraftStatsPlusTalk(CraftStatsPlusHolder stats, String host, int port) throws Exception {
+	public DirtBlockTalk(DirtBlockHolder stats, String host, int port) throws Exception {
 		this.host = host;
 		this.port = port;
 		this.stats = stats;
@@ -32,7 +32,7 @@ public class CraftStatsPlusTalk extends Thread {
 			server = new ServerSocket();
 			server.bind(new InetSocketAddress(host, port));
 		}catch(Exception e) {
-			LOG.log(Level.SEVERE, "[CraftStats+] Error initializing CraftStats+. Make sure your host and port are set correctly.", e);
+			LOG.log(Level.SEVERE, "[DirtBlock] Error initializing CraftStats+. Make sure your host and port are set correctly.", e);
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class CraftStatsPlusTalk extends Thread {
 		try{
 			server.close();
 		}catch(Exception e) {
-			LOG.log(Level.WARNING, "[CraftStats+] Could not shutdown cleanly!");
+			LOG.log(Level.WARNING, "[DirtBlock] Could not shutdown cleanly!");
 		}
 	}
 	
@@ -58,8 +58,8 @@ public class CraftStatsPlusTalk extends Thread {
 				
 				String line = in.readLine();
 				if(!line.equals("GoForIt")) {
-					LOG.log(Level.WARNING, "[CraftStats+] Bad response...");
-					throw new Exception("[CraftStats+] Error with CraftStats response code. Contact Us.");
+					LOG.log(Level.WARNING, "[DirtBlock] Bad response...");
+					throw new Exception("[DirtBlock] Error with CraftStats response code. Contact Us.");
 				}else {
 					out.write(stats.toJson());
 					out.newLine();
@@ -74,9 +74,9 @@ public class CraftStatsPlusTalk extends Thread {
 				socket.close();
 				
 			} catch(SocketException e) {
-				//LOG.log(Level.WARNING, "[CraftStats+] Server Reloaded? Protocol error. ", e.getStackTrace());
+				//LOG.log(Level.WARNING, "[DirtBlock] Server Reloaded? Protocol error. ", e.getStackTrace());
 			} catch(IOException e) {
-				LOG.log(Level.WARNING, "[CraftStats+] Error reading/writing. ", e.getStackTrace());
+				LOG.log(Level.WARNING, "[DirtBlock] Error reading/writing. ", e.getStackTrace());
 			}catch(Exception e) {
 				LOG.log(Level.WARNING, "Error, some exception caught.", e);
 			} 

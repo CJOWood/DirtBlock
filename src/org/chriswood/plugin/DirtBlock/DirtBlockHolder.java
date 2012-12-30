@@ -1,15 +1,15 @@
-package org.chriswood.plugin.CraftStatsPlus;
+package org.chriswood.plugin.DirtBlock;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.json.simple.JSONObject;
 
-public class CraftStatsPlusHolder {
-	public Map<String, Map<String, Map<String, Integer>>> stats = new HashMap<String, Map<String, Map<String, Integer>>>();
+public class DirtBlockHolder {
+	public Map<String, Map<String, Map<String, Double>>> stats = new HashMap<String, Map<String, Map<String, Double>>>();
 	//     Map<"Event", Map<"user", Map<"data", amount>>>
-	public CraftStatsPlusHolder() {}
+	public DirtBlockHolder() {}
 	
-	public void addData(String event, String user, String data, int dataAmt){
+	public void addData(String event, String user, String data, Double dataAmt){
 		if(stats.containsKey(event)){
 			if(stats.get(event).containsKey(user)){
 				if(stats.get(event).get(user).containsKey(data)){
@@ -18,12 +18,12 @@ public class CraftStatsPlusHolder {
 					stats.get(event).get(user).put(data, dataAmt);
 				}
 			}else{
-				stats.get(event).put(user, new HashMap<String, Integer>());
+				stats.get(event).put(user, new HashMap<String, Double>());
 				stats.get(event).get(user).put(data, dataAmt);
 			}
 		}else{
-			stats.put(event, new HashMap<String, Map<String, Integer>>());
-			stats.get(event).put(user, new HashMap<String, Integer>());
+			stats.put(event, new HashMap<String, Map<String, Double>>());
+			stats.get(event).put(user, new HashMap<String, Double>());
 			stats.get(event).get(user).put(data, dataAmt);
 		}
 	}
