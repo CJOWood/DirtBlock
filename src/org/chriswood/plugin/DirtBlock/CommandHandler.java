@@ -104,6 +104,12 @@ public class CommandHandler implements CommandExecutor {
 				
 				}
 				
+				else if (args[1].equalsIgnoreCase("updatecheck")) {
+					
+					ConfigHandler.toggleBoolean("UpdateCheck", sender);
+					
+				}
+				
 			}
 			
 			else {
