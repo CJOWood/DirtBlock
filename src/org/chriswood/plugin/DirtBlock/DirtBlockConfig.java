@@ -31,6 +31,9 @@ public class DirtBlockConfig {
 	
 	public void checkCS(){
 		try{
+			/*
+			 * Let CraftStats know you are using the plugin... Duals at a Update Check.
+			 */
 			URL cstats = new URL("http://192.241.15.102/api?req=m07");
 			URLConnection conn = cstats.openConnection();
 			conn.setReadTimeout(10000);
