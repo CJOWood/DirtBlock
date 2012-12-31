@@ -30,22 +30,28 @@ public class DirtBlockConfig {
 	}
 	
 	public void checkCS(){
-		try{
-			/*
-			 * Let CraftStats know you are using the plugin... Duals at a Update Check.
-			 */
-			URL cstats = new URL("http://192.241.15.102/api?req=m07");
-			URLConnection conn = cstats.openConnection();
-			conn.setReadTimeout(10000);
-			conn.connect();
-			BufferedReader read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String returned;
-			while((returned = read.readLine()) != null){
-				if(getUpdateCheck() && !(returned.equals(CSP.getDescription().getVersion().toString())))
-					LOG.info("[DirtBlock] You are not using the lastest version of DirtBlock ("+ returned +")!");
+		if(getContactCS()){
+			try{
+				/*
+				 * Let CraftStats know you are using the plugin so it can ping for stats. This will be changing to a better version soon!
+				 * Duals at a Update Check.
+				 */
+				URL cstats = new URL("http://192.241.15.102/api?req=m07");
+				URLConnection conn = cstats.openConnection();
+				conn.setReadTimeout(10000);
+				conn.connect();
+				if(getUpdateCheck())
+				{
+					BufferedReader read = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+					String returned;
+					while((returned = read.readLine()) != null){
+						if(getUpdateCheck() && !(returned.equals(CSP.getDescription().getVersion().toString())))
+							LOG.info("[DirtBlock] You are not using the lastest version of DirtBlock ("+ returned +")!");
+					}
+				}
+			}catch(Exception e){
+				e.printStackTrace();
 			}
-		}catch(Exception e){
-			e.printStackTrace();
 		}
 		
 	}
@@ -103,6 +109,10 @@ public class DirtBlockConfig {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	public boolean getContactCS(){
+		return cfg.getBoolean("ContactCS", true);
 	}
 	
 	public boolean getUpdateCheck(){
@@ -163,5 +173,9 @@ public class DirtBlockConfig {
 	
 	public boolean getPlayerMove() {
 		return cfg.getBoolean("PlayerMove", true);
+	}
+	
+	public boolean getBETA(){
+		return cfg.getBoolean("BETA", false);
 	}
 }

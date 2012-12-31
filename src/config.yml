@@ -14,6 +14,9 @@ XPGained: true
 PlayerDamage: true
 PlayerMove: true
 
+#Perform update check?
 UpdateCheck: true
+#Contact CraftStats? (Disabling this will prevent the plugin from talking to craftstats... which renders it useless.) [Required by Bukkit's TOS]
+ContactCS: true
 #Would you like to participate in BETA feature testing? (Set 'true' if you do)
 BETA: false
