@@ -1,5 +1,23 @@
 main: org.chriswood.plugin.DirtBlock.DirtBlock
 name: DirtBlock
-version: 1.20
-author: Chris Wood
+version: 1.21
+authors: [Chris Wood, Harry Joseph]
 description: A simple, lightweight plugin that collects data and returns it to our servers where you can view its statistics.
+
+commands:
+  db:
+    description: Root command.
+    aliases: [dirtblock]
+    
+permissions:
+  dirtblock.*:
+    description: Gives access to all DirtBlock commands
+    children:
+      dirtblock.help: true
+      dirtblock.toggle: true
+  dirtblock.help:
+    description: Ability to use the help command.
+    default: true
+  dirtblock.toggle:
+    description: Ability to use the toggle command.
+    default: false

@@ -5,19 +5,29 @@
 
 package org.chriswood.plugin.DirtBlock;
 
-
 import java.util.logging.*;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class DirtBlock extends JavaPlugin {
+	
+	public static DirtBlock db;
+
+	public DirtBlock() {
+		
+		db = this;
+	
+	}
 	
 	private static final Logger LOG = Logger.getLogger("DirtBlock");
 	private DirtBlockHolder statData = new DirtBlockHolder();
 	private DirtBlockTalk talker;
 	
-	public void onEnable(){
+	public void onEnable() {
 		DirtBlockConfig config = new DirtBlockConfig(this);
 		getServer().getPluginManager().registerEvents(new DirtBlockListener(statData, config), this);
+		
+		getCommand("db").setExecutor(new CommandHandler(this));
 		
 		//Initialize Talker...
 		String host = config.getHost();
@@ -33,8 +43,7 @@ public class DirtBlock extends JavaPlugin {
 		}
 	}
 	
-	protected void addData(String event, String user, String data, Double dataAmt)
-	{
+	protected void addData(String event, String user, String data, Double dataAmt) {
 		statData.addData(event, user, data, dataAmt);
 	}
 	
@@ -42,4 +51,5 @@ public class DirtBlock extends JavaPlugin {
 		if(talker != null)
 			talker.shutdown();
 	}
+	
 }
